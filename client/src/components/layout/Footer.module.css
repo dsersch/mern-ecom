@@ -1,4 +1,33 @@
 .footer {
-    background-color: black;
-    color: red;
+    background-color: #669bbc;
+    color: #fdf0d5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 4rem;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.footer p {
+    letter-spacing: 1px;
+}
+
+.footer p i {
+    color: #003049;
+    margin-left: .5rem
+}
+
+.social-links-container i {
+    font-size: 25px;
+    margin-right: 1rem;
+    transition: all .3s;
+}
+
+.social-links-container i:hover {
+    color: #003049
 }
