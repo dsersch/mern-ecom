@@ -5,6 +5,8 @@ const Home = () => {
     return (
         <main className={classes['home']}>
             <Card />
+            <Card />
+            <Card />
         </main>
     )
 }
