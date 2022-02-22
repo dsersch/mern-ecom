@@ -1,9 +1,10 @@
 import classes from './Home.module.css'
+import Card from '../utility/Card'
 
 const Home = () => {
     return (
         <main className={classes['home']}>
-            <h2 className={classes['heading-text']}>Working</h2>
+            <Card />
         </main>
     )
 }
