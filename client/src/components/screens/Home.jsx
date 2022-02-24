@@ -7,7 +7,7 @@ const Home = () => {
 
     useEffect(() => {
         const fetchGames = async () => {
-            const response = await fetch('/recent', {
+            const response = await fetch('/games/recent', {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json'
