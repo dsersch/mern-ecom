@@ -8,10 +8,10 @@ const Footer = () => {
                 <p>This is a test store front to work on e-commerce using the MERN stack!</p>
             </div>
             <div className={classes['social-links-container']}>
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-reddit-alien"></i>
+                <i className="fa-brands fa-facebook-f"></i>
+                <i className="fa-brands fa-instagram"></i>
+                <i className="fa-brands fa-twitter"></i>
+                <i className="fa-brands fa-reddit-alien"></i>
             </div>
         </footer>
     )

@@ -12,3 +12,11 @@ exports.getRecent = async (req, res) => {
         
     res.json(response.data.results)
 }
+
+exports.getGame = async (req, res) => {
+    const url = `https://api.rawg.io/api/games/${req.params.id}?key=${process.env.RAWGKEY}`
+
+    const response = await axios.get(url)
+
+    res.json(response.data)
+}

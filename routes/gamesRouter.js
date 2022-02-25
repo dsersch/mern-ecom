@@ -7,4 +7,8 @@ router
     .route('/recent')
     .get(gamesController.getRecent)
 
+router
+    .route('/:id')
+    .get(gamesController.getGame)
+
 module.exports = router;

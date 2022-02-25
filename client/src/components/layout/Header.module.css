@@ -27,23 +27,20 @@
     list-style: none;
 }
 
-.nav-link-container li {
-    margin: 0 .5rem;
-    transition: all .3s;
-}
-
-.nav-link-container li:hover {
-    color: #003049;
-}
-
 .nav-link {
+    margin: 0 .5rem;
     text-decoration: none;
-    color: inherit;
+    color: #fdf0d5;
     font-size: 1.2rem;
     text-transform: uppercase;
     border: none;
     background-color: transparent;
+    transition: all .3s;
     cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #003049
 }
 
 .nav-link i {
