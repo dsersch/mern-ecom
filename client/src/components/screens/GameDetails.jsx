@@ -26,7 +26,9 @@ const GameDetails = (props) => {
         <div className={classes['game-details']}>
             { game.name ?
                 <main>
+                    <div className={classes['hero-image']} style={{backgroundImage: `url(${game.background_image})`}}></div>
                     <h1 className={classes['heading-text']}>{game.name}</h1>
+                    <p className={classes['released']}>Release Date: {game.released}</p>
                     <div className={classes['description']} 
                         dangerouslySetInnerHTML={{ __html: game.description}}>
                     </div>
