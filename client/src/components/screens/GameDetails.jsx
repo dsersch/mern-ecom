@@ -24,8 +24,14 @@ const GameDetails = (props) => {
 
     return (
         <div className={classes['game-details']}>
-            { game.name ? <h1 className={classes['heading-text']}>{game.name}</h1>
-             : <LoadingSpinner />}
+            { game.name ?
+                <main>
+                    <h1 className={classes['heading-text']}>{game.name}</h1>
+                    <div className={classes['description']} 
+                        dangerouslySetInnerHTML={{ __html: game.description}}>
+                    </div>
+                </main>
+            : <LoadingSpinner />}
         </div>
     )
 }

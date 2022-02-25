@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import classes from './Home.module.css'
 import Card from '../utility/Card'
+import LoadingSpinner from '../utility/LoadingSpinner'
 
 const Home = () => {
     const [ games, setGames ] = useState([])
@@ -23,9 +24,11 @@ const Home = () => {
 
     return (
         <main className={classes['home']}>
-            {games.map((game) => {
-               return <Card key={game.id} gameData={game}/>
-            })}
+            { games.length < 1 ? <LoadingSpinner /> 
+                : games.map((game) => {
+                    return <Card key={game.id} gameData={game} />
+                })
+            }
         </main>
     )
 }
