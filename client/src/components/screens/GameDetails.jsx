@@ -1,31 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getGameDetails } from '../../actions/gameActions.js'
 import classes from './GameDetails.module.css'
 import LoadingSpinner from '../utility/LoadingSpinner'
 
-const GameDetails = (props) => {
+const GameDetails = () => {
+    const dispatch = useDispatch()
     let params = useParams()
-    const [ game, setGame ] = useState({})
+
+    const gameDetails = useSelector(state => state.gameDetails)
+    const { loading, error, game } = gameDetails
+
     
     useEffect(() => {
-        const fetchGame = async () => {
-            const response = await fetch(`/games/${params.id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            })
-            const data = await response.json()
-            setGame(data)
-        }
-
-        fetchGame()
-    }, [params.id])
+        dispatch(getGameDetails(params.id))
+    }, [params.id, dispatch])
 
     return (
         <div className={classes['game-details']}>
-            { game.name ?
-                <main>
+            { loading ? <LoadingSpinner /> 
+                : error ? <p>{error}</p>
+                : <main>
                     <div className={classes['hero-image']} style={{backgroundImage: `url(${game.background_image})`}}></div>
                     <h1 className={classes['heading-text']}>{game.name}</h1>
                     <p className={classes['released']}>Release Date: {game.released}</p>
@@ -33,7 +29,7 @@ const GameDetails = (props) => {
                         dangerouslySetInnerHTML={{ __html: game.description}}>
                     </div>
                 </main>
-            : <LoadingSpinner />}
+            }
         </div>
     )
 }
