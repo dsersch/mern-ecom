@@ -11,8 +11,12 @@ const Header = () => {
                         <button className={classes['nav-link']}><i className='fa-solid fa-house'></i>Home</button>
                     </li>
                 </Link>
-                <li><button className={classes['nav-link']}><i className='fa-solid fa-cart-shopping'></i>Cart</button></li>
-                <li><button className={classes['nav-link']}><i className='fa-solid fa-user'></i>Login</button></li>
+                <Link to='/cart'>
+                    <li><button className={classes['nav-link']}><i className='fa-solid fa-cart-shopping'></i>Cart</button></li>
+                </Link>
+                <Link to='/login'>
+                    <li><button className={classes['nav-link']}><i className='fa-solid fa-user'></i>Login</button></li>
+                </Link>
             </ul>
         </nav>
     )

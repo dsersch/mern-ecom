@@ -2,7 +2,9 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getGameDetails } from '../../actions/gameActions.js'
+// import { addToCart } from '../../actions/cartActions.js'
 import classes from './GameDetails.module.css'
+import Screen from '../utility/Screen.jsx'
 import LoadingSpinner from '../utility/LoadingSpinner'
 
 const GameDetails = () => {
@@ -17,8 +19,15 @@ const GameDetails = () => {
         dispatch(getGameDetails(params.id))
     }, [params.id, dispatch])
 
+    const addToCartHandler = () => {
+       dispatch({
+           type: 'CART_ADD_ITEM',
+           payload: game,
+       })
+    }
+
     return (
-        <div className={classes['game-details']}>
+        <Screen>
             { loading ? <LoadingSpinner /> 
                 : error ? <p>{error}</p>
                 : <main>
@@ -28,9 +37,11 @@ const GameDetails = () => {
                     <div className={classes['description']} 
                         dangerouslySetInnerHTML={{ __html: game.description}}>
                     </div>
+                    <div className={classes['price']}>${game.price}</div>
+                    <button className={classes['add-to-cart']} onClick={addToCartHandler}>Add To Cart</button>
                 </main>
             }
-        </div>
+        </Screen>
     )
 }
 
