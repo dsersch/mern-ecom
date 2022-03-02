@@ -10,7 +10,7 @@ const Card = (props) => {
             </div>
             <div className={classes['info-box']}>
                 <p className={classes['description']}>{props.gameData.name}</p>
-                <Link to={`games/${props.gameData.id}`}>
+                <Link to={`games/info/${props.gameData.id}`}>
                     <button className={classes['add-to-cart']}>${props.gameData.price}</button>
                 </Link>
             </div>
