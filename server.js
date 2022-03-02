@@ -20,8 +20,17 @@ const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
 
+// Routing
 app.use('/auth', authRouter)
 app.use('/games', gamesRouter)
+
+// Error handling
+app.use((req, res, next) => {
+    res.status(404).json({
+        status: 'failed',
+        message: 'cannot find route...',
+    })
+})
 
 // Start server
 app.listen(PORT, (err) => {

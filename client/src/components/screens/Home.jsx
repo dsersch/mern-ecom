@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import classes from './Home.module.css'
 import { listGames } from '../../actions/gameActions.js'
 import Card from '../utility/Card'
+import ErrorMessage from '../utility/ErrorMessage'
 import LoadingSpinner from '../utility/LoadingSpinner'
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
     return (
         <main className={classes['home']}>
             { loading ? <LoadingSpinner /> 
-                : error ? <p>{error}</p>
+                : error ? <ErrorMessage errorMessage={error.message} />
                 : games.map((game) => {
                     return <Card key={game.id} gameData={game} />
                 })

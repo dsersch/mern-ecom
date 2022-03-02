@@ -5,6 +5,7 @@ import { getGameDetails } from '../../actions/gameActions.js'
 // import { addToCart } from '../../actions/cartActions.js'
 import classes from './GameDetails.module.css'
 import Screen from '../utility/Screen.jsx'
+import ErrorMessage from '../utility/ErrorMessage.jsx'
 import LoadingSpinner from '../utility/LoadingSpinner'
 
 const GameDetails = () => {
@@ -29,7 +30,7 @@ const GameDetails = () => {
     return (
         <Screen>
             { loading ? <LoadingSpinner /> 
-                : error ? <p>{error}</p>
+                : error ? <ErrorMessage errorMessage={error.message} />
                 : <main>
                     <div className={classes['hero-image']} style={{backgroundImage: `url(${game.background_image})`}}></div>
                     <h1 className={classes['heading-text']}>{game.name}</h1>
