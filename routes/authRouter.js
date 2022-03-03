@@ -11,4 +11,8 @@ router
     .route('/login')
     .post(authController.login)
 
+router
+    .route('/profile')
+    .get(authController.protect, authController.getUser)
+
 module.exports = router

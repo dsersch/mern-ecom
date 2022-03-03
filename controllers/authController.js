@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../models/User.js')
+const jwt = require('jsonwebtoken')
 
 exports.registerNewUser = async (req, res) => {
     try {
@@ -9,14 +10,17 @@ exports.registerNewUser = async (req, res) => {
             password: req.body.password,
         })
 
-        res.status(200).json({
+        const token = newUser.getSignedToken()
+
+        res.status(201).json({
             status: 'success',
             data: newUser,
+            token,
         })
     } catch (err) {
         res.status(500).json({
-            status: 'failed to create user...',
-            message: err.message,
+            status: 'failed',
+            message: 'failed to create user...',
         })
     }
 }
@@ -39,16 +43,83 @@ exports.login = async (req, res) => {
             })
         }
 
-        // const token = user.getSignedToken()
+        const token = user.getSignedToken()
 
         res.status(200).json({
             status: 'success',
-            data: user
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin,
+                userCart: user.userCart,
+                token,
+            },
         })
     } catch (err) {
         res.status(404).json({
             status: 'failed',
             message: 'Failed to find that user...',
+        })
+    }
+}
+
+exports.getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select('-password')
+
+        res.status(200).json({
+            status: 'success',
+            data: user,
+        })
+    } catch (error) {
+        res.status(404).json({
+            status: 'failed',
+            message: 'user not found...'
+        })
+    }
+}
+
+exports.protect = async (req, res, next) => {
+    try {
+        let token
+    
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(' ')[1]
+        }
+    
+        if (!token) {
+            return res.status(401).json({
+                status: 'failed',
+                message: 'failed to find token...'
+            })
+        }
+    
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+
+        if (!decodedToken) {
+            return res.status(401).json({
+                status: 'failed',
+                message: 'failed to verify token...'
+            })
+        }
+    
+        const loggedInUser = await User.findById(decodedToken.id)
+
+        if (!loggedInUser) {
+            return res.status(401).json({
+                status: 'failed',
+                message: 'User no longer exists...'
+            })
+        }
+
+        req.user = loggedInUser
+    
+        next()
+    } catch (error) {
+        res.status(401).json({
+            status: 'failed',
+            message: 'not authorized...'
         })
     }
 }
