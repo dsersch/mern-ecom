@@ -1,0 +1,22 @@
+.profile {
+    color: red;
+}
+
+.logout-button {
+    border: none;
+    font-size: 1.25rem;
+    background-color: #669bbc;
+    color: #fdf0d5;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.logout-button:hover {
+    transform: scale(1.03);
+    color: #003049
+}
+
+.logout-button:active {
+    transform: scale(.98);
+}

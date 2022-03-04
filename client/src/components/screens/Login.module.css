@@ -1,3 +1,50 @@
-.login {
-    color: red;
+.login-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.form-control {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-control label {
+    font-size: 1.1rem;
+    margin-bottom: .5rem;
+}
+
+.form-control input {
+    border: none;
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    color: #003049;
+    border-radius: 10px;
+}
+
+.form-control input:focus {
+    outline-color: #669bbc;
+}
+
+.login-button {
+    border: none;
+    font-size: 1.25rem;
+    background-color: #669bbc;
+    color: #fdf0d5;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    transition: all .3s;
+}
+
+.login-button:hover {
+    transform: scale(1.03);
+    color: #003049
+}
+
+.login-button:active {
+    transform: scale(.98);
 }

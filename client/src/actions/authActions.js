@@ -30,8 +30,17 @@ export const login = (email, password) => async (dispatch) => {
 
             localStorage.setItem('userInfo', JSON.stringify(result.user))
         }
-
     } catch (error) {
-
+        dispatch({
+            type: 'USER_LOGIN_FAILURE',
+            payload: error,
+        })
     }
+}
+
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userInfo')
+    dispatch({
+        type: 'USER_LOGOUT'
+    })
 }
