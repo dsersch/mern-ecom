@@ -1,9 +1,13 @@
-.login-form {
+.standard-form {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+}
+
+.form {
+    margin-bottom: 1.5rem
 }
 
 .form-control {
@@ -30,7 +34,7 @@
     outline-color: #669bbc;
 }
 
-.login-button {
+.form-button {
     border: none;
     font-size: 1.25rem;
     background-color: #669bbc;
@@ -40,11 +44,11 @@
     transition: all .3s;
 }
 
-.login-button:hover {
+.form-button:hover {
     transform: scale(1.03);
     color: #003049
 }
 
-.login-button:active {
+.form-button:active {
     transform: scale(.98);
 }

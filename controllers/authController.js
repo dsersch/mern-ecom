@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id).select('-password')
+        const user = await User.findById(req.user._id)
 
         res.status(200).json({
             status: 'success',
@@ -76,6 +76,24 @@ exports.getUser = async (req, res) => {
         res.status(404).json({
             status: 'failed',
             message: 'user not found...'
+        })
+    }
+}
+
+exports.updateUser = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
+            new: true,
+        })
+
+        res.status(200).json({
+            status: 'success',
+            data: updatedUser,
+        })
+    } catch (error) {
+        res.status(404).json({
+            status: 'failed',
+            message: 'failed to update user...'
         })
     }
 }

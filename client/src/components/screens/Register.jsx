@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import classes from './Login.module.css'
+import classes from './Form.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../actions/authActions.js'
 import Screen from '../utility/Screen'
@@ -16,7 +16,7 @@ const Register = () => {
 
     const dispatch = useDispatch()
     const userRegister = useSelector(state => state.userRegister)
-    const { loading, error, userInfo } = userRegister
+    const { loading, error } = userRegister
     const userLogin = useSelector(state => state.userLogin)
     const { loggedInUser } = userLogin
 
@@ -56,7 +56,7 @@ const Register = () => {
 
     return (
         <Screen>
-            <main className={classes['login-form']}>
+            <main className={classes['standard-form']}>
                 <h1 className={classes['form-title']}>Sign Up</h1>
                 {message && <ErrorMessage errorMessage={message} />}
                 {error && <ErrorMessage errorMessage={error.message} />}
@@ -78,7 +78,7 @@ const Register = () => {
                         <label htmlFor='confirm-password'>Confirm Password</label>
                         <input type="password" value={confirmPassword} onChange={onConfirmPasswordChangeHandler} />
                     </div>
-                    <button className={classes['login-button']} type='submit'>Sign In</button>
+                    <button className={classes['form-button']} type='submit'>Sign In</button>
                 </form>
                 <p>Already have an account? <Link to='/login'>Sign In</Link></p>
             </main>

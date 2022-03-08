@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import classes from './Login.module.css'
+import classes from './Form.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/authActions.js'
 import Screen from '../utility/Screen'
@@ -40,7 +40,7 @@ const Login = () => {
 
     return (
         <Screen>
-            <main className={classes['login-form']}>
+            <main className={classes['standard-form']}>
                 <h1 className={classes['form-title']}>Sign In</h1>
                 {error && <ErrorMessage errorMessage={error.message} />}
                 {loading && <LoadingSpinner />}
@@ -53,7 +53,7 @@ const Login = () => {
                         <label htmlFor='password'>Password</label>
                         <input type="password" value={password} onChange={onPasswordChangeHandler} />
                     </div>
-                    <button className={classes['login-button']} type='submit'>Sign In</button>
+                    <button className={classes['form-button']} type='submit'>Sign In</button>
                 </form>
                 <p>Don't have an account? <Link to='/register'>Sign Up</Link></p>
             </main>
