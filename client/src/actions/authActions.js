@@ -92,7 +92,7 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 }
 
-export const getUserDetails = (token) => async (dispatch, getState) => {
+export const getUserDetails = (token) => async (dispatch) => {
     try {
         dispatch({
             type: 'USER_DETAILS_REQUEST'
@@ -123,6 +123,41 @@ export const getUserDetails = (token) => async (dispatch, getState) => {
         dispatch({
             type: 'USER_REGISTER_FAILURE',
             payload: error,
+        })
+    }
+}
+
+export const updateUserProfile = (user) => async (dispatch) => {
+    try {
+        dispatch({
+            type: 'USER_UPDATE_REQUEST'
+        })
+
+        const response = await fetch('/auth/profile', {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${user.token}`,
+            },
+        })
+
+        const result = await response.json()
+
+        if (response.status === 'failed') {
+            dispatch({
+                type: 'USER_UPDATE_FAILURE',
+                payload: result,
+            })
+        } else {
+            dispatch({
+                type: 'USER_UPDATE_SUCCESS',
+                payload: result.data
+            })
+        }
+    } catch (error) {
+        dispatch({
+            type: 'USER_UPDATE_FAILURE',
+            payload: error
         })
     }
 }

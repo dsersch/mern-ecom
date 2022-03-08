@@ -3,7 +3,7 @@ import Screen from '../utility/Screen'
 import ErrorMessage from '../utility/ErrorMessage'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { logout, getUserDetails } from '../../actions/authActions.js'
+import { logout, getUserDetails, updateUserProfile } from '../../actions/authActions.js'
 import { useEffect, useState } from 'react'
 import LoadingSpinner from '../utility/LoadingSpinner'
 
