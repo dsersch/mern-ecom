@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { userLoginReducer } from './reducers/authReducers.js'
+import { userLoginReducer, userRegisterReducer } from './reducers/authReducers.js'
 import { gamesListReducer, gameDetailsReducer } from './reducers/gameReducers.js'
 import { cartReducer } from './reducers/cartReducers.js'
 
@@ -10,6 +10,7 @@ const reducer = combineReducers({
     gameDetails: gameDetailsReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
+    userRegister: userRegisterReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') 

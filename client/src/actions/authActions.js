@@ -44,3 +44,50 @@ export const logout = () => (dispatch) => {
         type: 'USER_LOGOUT'
     })
 }
+
+export const register = (name, email, password) => async (dispatch) => {
+    try {
+        dispatch({
+            type: 'USER_REGISTER_REQUEST'
+        })
+
+        const response = await fetch('/auth/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                name,
+                email,
+                password,
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+
+        const result = await response.json()
+
+
+        if (result.status === 'failed') {
+            dispatch({
+                type: 'USER_REGISTER_FAILURE',
+                payload: result,
+            })
+        } else {
+            dispatch({
+                type: 'USER_REGISTER_SUCCESS',
+                payload: result.user,
+            })
+
+            dispatch({
+                type: 'USER_LOGIN_SUCCESS',
+                payload: result.user,
+            })
+
+            localStorage.setItem('userInfo', JSON.stringify(result.user))
+        }
+    } catch (error) {
+        dispatch({
+            type: 'USER_REGISTER_FAILURE',
+            payload: error,
+        })
+    }
+}
