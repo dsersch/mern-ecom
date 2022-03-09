@@ -14,6 +14,6 @@ router
 router
     .route('/profile')
     .get(authController.protect, authController.getUser)
-    .post(authController.protect, authController.updateUser)
+    .patch(authController.protect, authController.updateUser)
 
 module.exports = router

@@ -12,12 +12,15 @@ const Profile = () => {
     const [ email, setEmail ] = useState('') 
     const [ password, setPassword ] = useState('') 
     const [ confirmPassword, setConfirmPassword ] = useState('') 
+    const [ message, setMessage ] = useState(null)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
     const userDetails = useSelector(state => state.userDetails)
     const { loading, error, user } = userDetails
+    const updateUser = useSelector(state => state.updateUser)
+    const { success } = updateUser
 
     useEffect(() => {
         if (!userInfo) {
@@ -50,7 +53,16 @@ const Profile = () => {
 
     const onUpdateHandler = (event) => {
         event.preventDefault()
-        console.log('submitted...')
+        if (password !== confirmPassword) {
+            setMessage('passwords dont match...')
+        } else {
+            setMessage(null)
+            dispatch(updateUserProfile({
+                name,
+                email,
+                password,
+            }, userInfo.token))
+        }
     }
 
     const onLogoutHandler = () => {
@@ -63,6 +75,8 @@ const Profile = () => {
             loading ? <LoadingSpinner />
                 : error ? <ErrorMessage errorMessage={user.message} />
                 : <main className={classes['standard-form']}>
+                    {success && <p>updated user profile!</p>}
+                    {message && <ErrorMessage errorMessage={message} />}
                     <form className={classes['form']} onSubmit={onUpdateHandler}>
                     <div className={classes['form-control']}>
                         <label htmlFor='name'>Name</label>

@@ -20,7 +20,7 @@ export const login = (email, password) => async (dispatch) => {
         if (result.status === 'failed') {
             dispatch({
                 type: 'USER_LOGIN_FAILURE',
-                payload: result.user
+                payload: result
             })
         } else {
             dispatch({
@@ -127,7 +127,7 @@ export const getUserDetails = (token) => async (dispatch) => {
     }
 }
 
-export const updateUserProfile = (user) => async (dispatch) => {
+export const updateUserProfile = (user, token) => async (dispatch) => {
     try {
         dispatch({
             type: 'USER_UPDATE_REQUEST'
@@ -135,9 +135,10 @@ export const updateUserProfile = (user) => async (dispatch) => {
 
         const response = await fetch('/auth/profile', {
             method: 'PATCH',
+            body: JSON.stringify(user),
             headers: {
                 'Content-type': 'application/json',
-                Authorization: `Bearer ${user.token}`,
+                Authorization: `Bearer ${token}`,
             },
         })
 

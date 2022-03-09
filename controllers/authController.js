@@ -82,9 +82,13 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
-            new: true,
-        })
+        const userToUpdate = await User.findById(req.user._id)
+
+        userToUpdate.name = req.body.name || userToUpdate.name
+        userToUpdate.email = req.body.email || userToUpdate.email
+        userToUpdate.password = req.body.password || userToUpdate.password
+
+        const updatedUser = await userToUpdate.save()
 
         res.status(200).json({
             status: 'success',
