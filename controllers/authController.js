@@ -66,7 +66,7 @@ exports.login = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-        const user = await User.findById(req.user._id)
+        const user = await User.findById(req.user._id).populate('addresses')
 
         res.status(200).json({
             status: 'success',

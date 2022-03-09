@@ -1,5 +1,6 @@
 const express = require('express')
 const authController = require('../controllers/authController.js')
+const addressController = require('../controllers/ShippingAddressController.js')
 
 const router = express.Router()
 
@@ -15,5 +16,9 @@ router
     .route('/profile')
     .get(authController.protect, authController.getUser)
     .patch(authController.protect, authController.updateUser)
+
+router
+    .route('/address')
+    .post(authController.protect, addressController.createShippingAddress)
 
 module.exports = router
