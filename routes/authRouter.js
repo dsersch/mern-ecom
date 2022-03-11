@@ -21,4 +21,8 @@ router
     .route('/address')
     .post(authController.protect, addressController.createShippingAddress)
 
+router
+    .route('/address/:id')
+    .delete(authController.protect, addressController.deleteAddress)
+
 module.exports = router
