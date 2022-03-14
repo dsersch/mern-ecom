@@ -27,6 +27,23 @@ exports.createShippingAddress = async (req, res) => {
     }
 }
 
+exports.editAddress = async (req, res) => {
+    try {
+        const updatedAddress = await ShippingAddress.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+        res.status(200).json({
+            status: 'success',
+            data: updatedAddress,
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 'failed',
+            message: 'Failed to update address....',
+            error,
+        })
+    }
+}
+
 exports.deleteAddress = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.user._id, { addresses: req.user.addresses.filter((address) => {return address.toString() !== req.params.id })}, { new: true })
