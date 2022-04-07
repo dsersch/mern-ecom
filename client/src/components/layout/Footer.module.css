@@ -23,6 +23,7 @@
 }
 
 .social-links-container i {
+    cursor: pointer;
     font-size: 25px;
     margin-right: 1rem;
     transition: all .3s;

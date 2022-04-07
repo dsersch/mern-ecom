@@ -8,6 +8,7 @@ import Cart from './components/screens/Cart'
 import Profile from './components/screens/Profile'
 import Login from './components/screens/Login';
 import Register from './components/screens/Register';
+import Checkout from './components/screens/Checkout';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/checkout' element={<Checkout />} />
           <Route path='*' element={<Home />} />
         </Routes>
         <Footer />
